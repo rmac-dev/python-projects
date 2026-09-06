@@ -1,0 +1,65 @@
+import random
+
+print("Welcome to Rock Paper Scissors Game.")
+
+# Takes result from each round condition to create final score at end of the game:
+win_score = 0 #Displays how many games have been won by player
+lose_score = 0 # Displays how many games have been lost by player
+tie_score = 0 # Displays how many games have been tied between CPU and Player (Same option for each side.)
+
+# Get the number of rounds from the user
+round_choice = input("How many times would you like to play against the computer: ")
+
+try:
+    # Convert the user's input to an integer if it was given correctly.
+    repeat_count = int(round_choice)
+
+    # Check if the number of rounds is a valid input
+    if repeat_count > 0:
+        print(f"You will now play {repeat_count} rounds of Rock Paper Scissors.")
+
+        # This is the for loop which allows user to play multiple rounds.
+        for i in range(repeat_count):
+            print(f"\n--- Round {i + 1} of {repeat_count} ---")
+
+            # Computer will have automated response at random when player picks an option.
+            computer_options = ["Rock", "Paper", "Scissors"]
+            computer_choice = random.choice(computer_options)
+            
+            # Get the player's choice for the round.
+            player_choice = input("It's your turn.\nType in the following...\nRock\nPaper\nScissors\nEnter your choice: ").capitalize()
+            
+            # This will display if the user gives incorrect format in their input:
+            while player_choice not in computer_options:
+                print("Invalid choice. Please choose Rock, Paper, or Scissors.")
+                player_choice = input("Enter your choice: ").capitalize()
+
+            print(f"\nYour choice: {player_choice}")
+            print(f"Computer's choice: {computer_choice}\n")
+
+            # Check for a tie first
+            if player_choice == computer_choice:
+                print("It's a tie!")
+                tie_score += 1
+            # Check every loss outcome for the player
+            elif (player_choice == "Rock" and computer_choice == "Paper") or \
+                 (player_choice == "Paper" and computer_choice == "Scissors") or \
+                 (player_choice == "Scissors" and computer_choice == "Rock"):
+                print("You have lost.")
+                lose_score += 1
+            # If it's not a tie or a loss, it must be a win
+            else:
+                print("You have won!")
+                win_score += 1
+
+        # Print the final score after the loop has completed all rounds.
+        print("\n--- Game Over ---")
+        print(f"Final Score: You won {win_score} games, lost {lose_score} games, and tied {tie_score} games.")
+
+    else:
+        print("Please enter a positive number.")
+
+except ValueError:
+    # This message is displayed if the user input is not 1 out of 3 valid options:
+    print("Response was Invalid. Please Enter a Valid Number.")
+    
