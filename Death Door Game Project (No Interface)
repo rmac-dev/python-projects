@@ -1,0 +1,101 @@
+import random
+
+print("Welcome to the Door Game.")
+# The input() function returns a string, so it needs to be compared to a string.
+choose_difficulty = input("Please choose which difficulty you would like to play on.\n1.Easy Mode:\n Start with 3 lives, 4 doors, 25% Chance of losing a life, +1 Score added each pass.\n2.Hardcore Mode:\n Start on 1 life, 3 Doors, 66.6% Chance of Death, +5 Score added on each pass.\nChoose your option: ")
+
+# The game pathways are now built in an if/elif/else block.
+
+if choose_difficulty == "1":
+    print("Starting Easy Mode Now...")
+    # Preset for scores and lives on Easy Mode:
+    lives = 3
+    score = 0
+    possible_doors = (1, 2, 3, 4)
+    doors_to_choose = 4
+
+    # The rounds will continue in a loop as long as the player has lives
+    while lives > 0:
+        print(f"\nYou have {lives} lives remaining.")
+        print(f"Your current score is {score}.")
+        
+        # The death door lands on a random number for each new round
+        death_door = random.randint(1, doors_to_choose)
+        
+        try:
+            door_choice = int(input(f"Which door would you like to pick?\n1\n2\n3\n4\nSelect here: "))
+
+            # Input validation
+            if door_choice not in possible_doors:
+                print("Invalid choice. Please pick a door between 1 and 4.")
+                continue # Skips the rest of the current loop iteration
+                
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue # Skips the rest of the current loop iteration
+
+        print(f"\nYour choice was: {door_choice}.\nThe Death Door was: {death_door}.")
+
+        # Logic to check the player's choice and update the score/lives
+        if door_choice == death_door:
+            print("You have chosen the death door. You lost a life!")
+            lives -= 1
+            
+        else:
+            print("You managed to avoid the death door, well done!")
+            score += 1
+
+    # Game Over Message for Easy Mode. This code is outside the loop and only runs when the 'while' condition is false
+    print("\n--- Game Over ---")
+    print(f"You have now run out of lives. Your total score was {score}.")
+
+# ---
+    
+elif choose_difficulty == "2":
+    print("Starting Hardcore Mode Now...")
+    # Initialize scores and lives for Hardcore Mode
+    lives = 1
+    score = 0
+    possible_doors = (1, 2, 3)
+    doors_to_choose = 3
+
+    # The main game loop for Hardcore mode
+    while lives > 0:
+        print(f"\nYou have {lives} life remaining.")
+        print(f"Your current score is {score}.")
+        
+        # The death door is chosen for each new round
+        # random.randint(1, 3) is the correct usage
+        death_door = random.randint(1, doors_to_choose)
+        
+        try:
+            door_choice = int(input("Which door would you like to pick?\n1\n2\n3\nSelect here: "))
+
+            # Input validation
+            if door_choice not in possible_doors:
+                print("Invalid choice. Please pick a door between 1 and 3.")
+                continue 
+                
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            continue
+
+        print(f"\nYour choice was: {door_choice}.\nThe Death Door was: {death_door}.")
+
+        # Conditions for Hardcore Mode
+        if door_choice == death_door:
+            print("You have chosen the death door. You lost a life!")
+            lives -= 1
+            
+        else:
+            print("You managed to avoid the death door, well done!")
+            score += 5
+
+    # Game over message for Hardcore Mode
+    print("\n--- Game Over ---")
+    print(f"You have now run out of lives. Your total score was {score}.")
+
+# ---
+
+else:
+    print("Invalid difficulty choice. Please run the program again and select either 1 or 2.")
