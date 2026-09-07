@@ -1,6 +1,6 @@
 import random
 
-print("Welcome to the Door Game.")
+print("Welcome to the Door Game!")
 # The input() function returns a string, so it needs to be compared to a string.
 choose_difficulty = input("Please choose which difficulty you would like to play on.\n1.Easy Mode:\n Start with 3 lives, 4 doors, 25% Chance of losing a life, +1 Score added each pass.\n2.Hardcore Mode:\n Start on 1 life, 3 Doors, 66.6% Chance of Death, +5 Score added on each pass.\nChoose your option: ")
 
